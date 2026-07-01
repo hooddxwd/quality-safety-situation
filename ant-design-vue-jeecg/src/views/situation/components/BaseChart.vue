@@ -23,7 +23,7 @@ export default {
     return { chart: null }
   },
   watch: {
-    option: { deep: true, handler () { this.render() } }
+    option () { this.render() }
   },
   mounted () {
     ensureTheme()

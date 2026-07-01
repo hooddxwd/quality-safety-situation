@@ -47,16 +47,15 @@ export default {
         series: [
           {
             type: 'effectScatter', coordinateSystem: 'geo',
-            data: this.data.points.map(p => ({ name: p.name, value: p.value })),
+            data: this.data.points.map(p => ({ name: p.name, value: p.value, level: p.level })),
             symbolSize: 12, rippleEffect: { scale: 4 },
             itemStyle: {
-              color: (params) => ({ red: '#ff4d4f', yellow: '#faad14', green: '#52c41a' })[
-                (this.data.points[params.dataIndex] || {}).level || 'blue']
+              color: (params) => ({ red: '#ff4d4f', yellow: '#faad14', green: '#52c41a' })[params.data.level] || '#40a9ff'
             }
           },
           {
             type: 'lines', coordinateSystem: 'geo',
-            data: this.data.lines.map(l => ({ coords: [[l.coords[0], l.coords[1]], [l.coords[2], l.coords[3]]] })),
+            data: this.data.lines,
             effect: { show: true, period: 5, trailLength: 0.4, symbolSize: 5 },
             lineStyle: { color: '#40a9ff', width: 1, opacity: 0.6, curveness: 0.2 }
           }

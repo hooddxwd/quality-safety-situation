@@ -45,15 +45,10 @@ export default {
 <!-- 本页布局（scoped） -->
 <style lang="less" scoped>
 .situation-stage { box-sizing: border-box; display: flex; flex-direction: column; }
-.situation-header-row { height: 80px; flex: 0 0 80px; }
 .situation-body {
   flex: 1; display: grid;
   grid-template-columns: 420px 1fr 420px;
   gap: 12px; padding: 0 12px 12px;
 }
-.col {
-  display: flex; flex-direction: column; gap: 12px;
-  color: #fff; justify-content: center; align-items: center;
-  font-size: 18px;
-}
+.col { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
 </style>
