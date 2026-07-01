@@ -295,6 +295,12 @@ export const asyncRouterMap = [
  */
 export const constantRouterMap = [
   {
+    path: '/situation',
+    name: 'situation',
+    component: () => import('@/views/situation/index'),
+    meta: { title: '首页态势' }
+  },
+  {
     path: '/user',
     component: UserLayout,
     redirect: '/user/login',
