@@ -4,7 +4,7 @@
       <situation-header :data="header" :active-tab="activeTab" @nav="onNav" @alert="onAlert" />
       <div class="situation-body">
         <left-column class="col col-left" />
-        <div class="col col-center">中列占位</div>
+        <center-map class="col col-center" />
         <div class="col col-right">右列占位</div>
       </div>
     </div>
@@ -16,11 +16,12 @@ import { message } from 'ant-design-vue'
 import useScale from './useScale'
 import SituationHeader from './components/SituationHeader'
 import LeftColumn from './modules/LeftColumn'
+import CenterMap from './components/CenterMap'
 import { getSituationHeader } from './api/situationApi'
 
 export default {
   name: 'SituationIndex',
-  components: { SituationHeader, LeftColumn },
+  components: { SituationHeader, LeftColumn, CenterMap },
   mixins: [useScale],
   data () {
     return { header: { title: '', navTabs: [], filters: {}, kpi: [], safety: [], alertBtn: '' }, activeTab: '总体态势' }
