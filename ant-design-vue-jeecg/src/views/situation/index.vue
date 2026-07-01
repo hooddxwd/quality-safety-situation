@@ -5,7 +5,7 @@
       <div class="situation-body">
         <left-column class="col col-left" />
         <center-map class="col col-center" />
-        <div class="col col-right">右列占位</div>
+        <right-column class="col col-right" />
       </div>
     </div>
   </div>
@@ -17,11 +17,12 @@ import useScale from './useScale'
 import SituationHeader from './components/SituationHeader'
 import LeftColumn from './modules/LeftColumn'
 import CenterMap from './components/CenterMap'
+import RightColumn from './modules/RightColumn'
 import { getSituationHeader } from './api/situationApi'
 
 export default {
   name: 'SituationIndex',
-  components: { SituationHeader, LeftColumn, CenterMap },
+  components: { SituationHeader, LeftColumn, CenterMap, RightColumn },
   mixins: [useScale],
   data () {
     return { header: { title: '', navTabs: [], filters: {}, kpi: [], safety: [], alertBtn: '' }, activeTab: '总体态势' }
