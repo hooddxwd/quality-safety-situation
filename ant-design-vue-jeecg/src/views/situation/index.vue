@@ -1,25 +1,38 @@
 <template>
-  <div class="situation-screen">
+  <div class="situation-screen" :style="screenStyle">
     <div class="situation-stage" :style="scaleStyle">
       <!-- 顶部导航 -->
       <situation-header :data="header" :active-tab="activeTab" @nav="onNav" @alert="onAlert" />
 
       <!-- 第一行：7 个 KPI 卡片 -->
-      <div class="kpi-row">
+      <div class="kpi-row stage-section">
         <div v-for="(c, i) in kpiCards" :key="i" class="kpi-card">
           <div class="kpi-card__label">{{ c.label }}</div>
-          <div v-if="!c.sub" class="kpi-card__value num-tech" :class="'tone-' + c.tone">{{ c.value }}<small>{{ c.unit }}</small></div>
+          <a-statistic
+            v-if="!c.sub"
+            class="kpi-card__value num-tech"
+            :class="'tone-' + c.tone"
+            :value="c.value"
+            :suffix="c.unit"
+            group-separator=""
+          />
           <div v-else class="kpi-card__sub">
             <div v-for="(s, j) in c.sub" :key="j" class="kpi-sub-item">
               <span class="kpi-sub-label">{{ s.label }}</span>
-              <span class="kpi-sub-value num-tech" :class="'tone-' + s.tone">{{ s.value }}<small>{{ s.unit }}</small></span>
+              <a-statistic
+                class="kpi-sub-value num-tech"
+                :class="'tone-' + s.tone"
+                :value="s.value"
+                :suffix="s.unit"
+                group-separator=""
+              />
             </div>
           </div>
         </div>
       </div>
 
       <!-- 第二行：质量安全指标(25%) ｜ 分布态势地图(50%) ｜ 任务能力指标(25%) -->
-      <div class="row-main">
+      <div class="row-main stage-section">
         <tech-panel title="质量安全评价指标" tab="态势分析">
           <metric-bar v-for="m in quality" :key="m.id" :item="m" :level="m.level" />
         </tech-panel>
@@ -30,7 +43,7 @@
       </div>
 
       <!-- 第三行：4 等分 已识别风险 ｜ 处置进展 ｜ AI叙事 ｜ 预测风险 -->
-      <div class="row-bottom">
+      <div class="row-bottom stage-section">
         <tech-panel title="已识别风险清单" tab="风险识别">
           <risk-list-item v-for="r in risks" :key="r.id" :item="r" />
         </tech-panel>
@@ -115,36 +128,66 @@ export default {
 <style lang="less" scoped>
 @import './theme/variables.less';
 
+/* 长页面 16:18（1920×2160）：保留 header 全宽，其余 section 两侧 30px、底部 30px、行间 20px */
 .situation-stage {
-  box-sizing: border-box; display: flex; flex-direction: column;
-  gap: 12px; padding: 10px 16px 14px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 30px;
+}
+
+/* header 之外的 section：两侧 30px 内边距 */
+.stage-section {
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 /* 第一行：7 KPI 卡片 */
-.kpi-row { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; flex: 0 0 auto; }
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 20px;
+  flex: 0 0 150px;
+  min-height: 150px;
+}
 .kpi-card {
   background: @sit-panel-bg; border: 1px solid @sit-panel-border; border-radius: 4px;
-  padding: 10px 14px; display: flex; flex-direction: column; justify-content: center;
+  padding: 16px 20px; display: flex; flex-direction: column; justify-content: center;
   box-shadow: 0 0 12px -4px @sit-card-glow, inset 0 0 16px -8px rgba(24, 144, 255, 0.2);
 }
-.kpi-card__label { color: @sit-text-dim; font-size: 12px; }
-.kpi-card__value { font-size: 28px; line-height: 1.1; margin-top: 4px; }
-.kpi-card__value small { font-size: 12px; color: @sit-text-dim; margin-left: 3px; font-weight: 400; }
-.kpi-card__sub { display: flex; gap: 16px; margin-top: 4px; }
+.kpi-card__label { color: @sit-text; font-size: 16px; }
+.kpi-card__value { margin-top: 6px; }
+.kpi-card__value /deep/ .ant-statistic-content { font-size: 38px; line-height: 1.1; color: inherit; }
+.kpi-card__value /deep/ .ant-statistic-content-suffix { font-size: 16px; color: @sit-text; margin-left: 4px; font-weight: 400; }
+.kpi-card__sub { display: flex; gap: 20px; margin-top: 6px; }
 .kpi-sub-item { display: flex; flex-direction: column; }
-.kpi-sub-label { color: @sit-text-dim; font-size: 11px; }
-.kpi-sub-value { font-size: 20px; line-height: 1.1; }
+.kpi-sub-label { color: @sit-text; font-size: 14px; }
+.kpi-sub-value /deep/ .ant-statistic-content { font-size: 26px; line-height: 1.1; color: inherit; }
+.kpi-sub-value /deep/ .ant-statistic-content-suffix { font-size: 14px; color: @sit-text; margin-left: 4px; font-weight: 400; }
 
-.tone-blue { color: @sit-blue; text-shadow: 0 0 8px rgba(24, 144, 255, 0.5); }
-.tone-yellow { color: @sit-yellow; text-shadow: 0 0 8px rgba(255, 193, 7, 0.5); }
-.tone-red { color: @sit-red; text-shadow: 0 0 8px rgba(255, 77, 79, 0.5); }
-.tone-green { color: @sit-green; text-shadow: 0 0 8px rgba(0, 196, 140, 0.5); }
+.tone-blue /deep/ .ant-statistic-content { color: @sit-blue; text-shadow: 0 0 8px rgba(24, 144, 255, 0.5); }
+.tone-yellow /deep/ .ant-statistic-content { color: @sit-yellow; text-shadow: 0 0 8px rgba(255, 193, 7, 0.5); }
+.tone-red /deep/ .ant-statistic-content { color: @sit-red; text-shadow: 0 0 8px rgba(255, 77, 79, 0.5); }
+.tone-green /deep/ .ant-statistic-content { color: @sit-green; text-shadow: 0 0 8px rgba(0, 196, 140, 0.5); }
 
-/* 第二行：25% / 50% / 25% */
-.row-main { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 12px; flex: 1.4 1 0; min-height: 0; }
+/* 第二行：25% / 50% / 25%，长页面下显式高度让地图有空间 */
+.row-main {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  flex: 0 0 1000px;
+  min-height: 1000px;
+}
 .row-main > * { min-height: 0; height: 100%; }
 
 /* 第三行：4 等分 */
-.row-bottom { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; flex: 1 1 0; min-height: 0; }
+.row-bottom {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  flex: 0 0 800px;
+  min-height: 800px;
+}
 .row-bottom > * { min-height: 0; height: 100%; }
 </style>

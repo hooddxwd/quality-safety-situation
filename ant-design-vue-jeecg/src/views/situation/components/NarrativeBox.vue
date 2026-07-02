@@ -13,7 +13,7 @@ export default { name: 'NarrativeBox', props: { data: { type: Array, required: t
 
 <style lang="less" scoped>
 @import '../theme/variables.less';
-.narr-block { margin-bottom: 8px; }
-.narr-title { color: @sit-blue; font-size: 13px; font-weight: 600; }
-.narr-text { color: @sit-text-dim; font-size: 12px; line-height: 1.6; margin-top: 2px; }
+.narr-block { margin-bottom: 12px; }
+.narr-title { color: @sit-blue; font-size: 16px; font-weight: 600; }
+.narr-text { color: @sit-text; font-size: 14px; line-height: 1.7; margin-top: 4px; }
 </style>

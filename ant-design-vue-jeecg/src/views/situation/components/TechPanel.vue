@@ -1,11 +1,9 @@
 <template>
-  <section class="tech-panel">
-    <header class="tech-panel__header">
-      <span class="tech-panel__title">{{ title }}</span>
-      <span v-if="tab" class="tech-panel__tab">{{ tab }}</span>
-    </header>
-    <div class="tech-panel__body"><slot /></div>
-  </section>
+  <a-card class="tech-panel" :bordered="false">
+    <div slot="title" class="tech-panel__title">{{ title }}</div>
+    <div v-if="tab" slot="extra" class="tech-panel__tab">{{ tab }}</div>
+    <slot />
+  </a-card>
 </template>
 
 <script>
@@ -19,5 +17,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-/* .tech-panel / .tech-panel__* 由 index.vue 全局引入的 situation.less 提供，此处无需重复定义 */
+/* tech-panel / ant-card overrides 由 index.vue 全局引入的 situation.less 提供 */
 </style>

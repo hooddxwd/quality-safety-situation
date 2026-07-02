@@ -1,50 +1,71 @@
 @import './theme/variables.less';
 
 .situation-screen {
-  position: fixed; inset: 0;
-  width: 100vw; height: 100vh;
-  overflow: hidden;
+  position: relative;
+  width: 100vw;
+  overflow-x: hidden;
   font-family: @sit-font-cn;
-  background:
-    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(24, 144, 255, 0.22) 0%, transparent 60%),
-    linear-gradient(180deg, #08244a 0%, @sit-bg 100%);
+  background: @sit-bg;
 }
 
-// 可复用科技发光面板
+.situation-stage {
+  background: url('./assets/bj.png') center top / 100% 100% no-repeat;
+  display: flex; flex-direction: column;
+}
+
+// 可复用科技发光面板（基于 a-card，覆盖默认白底样式）
 .tech-panel {
   position: relative;
+  display: flex; flex-direction: column;
   background: @sit-panel-bg;
   border: 1px solid @sit-panel-border;
   border-radius: 4px;
-  display: flex; flex-direction: column;
   box-shadow: 0 0 14px -3px @sit-card-glow, inset 0 0 20px -10px rgba(24, 144, 255, 0.25);
+  overflow: hidden;
 
-  &__header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 8px 14px;
+  // 覆盖 a-card 默认背景/边框
+  &.ant-card { background: @sit-panel-bg; border: 1px solid @sit-panel-border; border-radius: 4px; box-shadow: 0 0 14px -3px @sit-card-glow, inset 0 0 20px -10px rgba(24, 144, 255, 0.25); }
+  &.ant-card-bordered { border: 1px solid @sit-panel-border; }
+
+  // a-card 头部
+  .ant-card-head {
+    min-height: auto;
+    padding: 0 18px;
     border-bottom: 1px solid rgba(24, 144, 255, 0.22);
+    color: @sit-text;
   }
-  &__title {
-    color: @sit-text; font-size: 15px; font-weight: 700; letter-spacing: 1px;
-    display: flex; align-items: center; gap: 8px;
-    // 左侧箭头/光条装饰
+  .ant-card-head-title {
+    padding: 12px 0;
+    color: @sit-text; font-size: 20px; font-weight: 700; letter-spacing: 1px;
+  }
+  .tech-panel__title {
+    color: @sit-text; font-size: 20px; font-weight: 700; letter-spacing: 1px;
+    display: flex; align-items: center; gap: 10px;
     &::before {
-      content: ''; display: inline-block; width: 4px; height: 14px;
+      content: ''; display: inline-block; width: 5px; height: 18px;
       background: linear-gradient(180deg, @sit-cyan, @sit-blue);
       border-radius: 1px; box-shadow: 0 0 6px @sit-cyan;
     }
   }
-  &__tab {
-    color: @sit-cyan; font-size: 12px;
-    border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 10px; padding: 2px 10px;
+  .ant-card-extra { padding: 8px 0; }
+  .tech-panel__tab {
+    color: @sit-cyan; font-size: 14px;
+    border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 12px; padding: 3px 12px;
     background: rgba(0, 229, 255, 0.08);
+    display: inline-block;
   }
-  &__body { flex: 1; padding: 10px 14px; overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
+
+  // a-card body
+  .ant-card-body {
+    flex: 1; padding: 10px 14px;
+    overflow: hidden; display: flex; flex-direction: column; min-height: 0;
+  }
 
   // 四角科技角标
   &::before, &::after {
     content: ''; position: absolute; width: 10px; height: 10px;
     border-color: @sit-cyan; border-style: solid; border-width: 0;
+    z-index: 1; pointer-events: none;
   }
   &::before { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
   &::after  { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
