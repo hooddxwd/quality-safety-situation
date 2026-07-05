@@ -1,0 +1,31 @@
+@import './theme/variables.less';
+
+.sa-screen {
+  position: relative;
+  width: 100vw;
+  font-family: @sit-font-cn;
+  background: @sit-bg;
+}
+
+.sa-stage {
+  position: relative;
+}
+
+.sa-page {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.sa-slot {
+  position: absolute;
+  background: rgba(6, 26, 51, 0.92);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.num-tech { font-family: @sit-font-num; font-weight: 700; }
