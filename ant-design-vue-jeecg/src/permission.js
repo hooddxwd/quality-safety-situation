@@ -14,7 +14,7 @@ whiteList.push(OAUTH2_LOGIN_PAGE_PATH)
 
 router.beforeEach((to, from, next) => {
   // 【临时·Phase1 预览】大屏免登录直进（mock 数据，不依赖后端）；接入真实鉴权后删除此 if
-  if (to.path === '/situation') { return next() }
+  if (to.path === '/situation' || to.path.startsWith('/special-analysis')) { return next() }
   //update-begin---author:scott ---date:2022-10-13  for：[jeecg-boot/issues/4091]多级路由缓存问题 #4091-----------
   //解决三级菜单无法缓存问题
   //参考： https://blog.csdn.net/qq_37322135/article/details/126013301
