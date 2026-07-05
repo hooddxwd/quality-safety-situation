@@ -1,0 +1,24 @@
+{
+  "color": ["#40a9ff", "#36cfc9", "#faad14", "#ff4d4f", "#9254de", "#52c41a"],
+  "backgroundColor": "transparent",
+  "textStyle": { "color": "#ffffff", "fontFamily": "Noto Sans SC, Microsoft YaHei, sans-serif" },
+  "title": { "textStyle": { "color": "#ffffff" } },
+  "legend": { "textStyle": { "color": "#8fb3d9" } },
+  "tooltip": {
+    "backgroundColor": "rgba(15,42,74,0.95)",
+    "borderColor": "#1e4a7a",
+    "textStyle": { "color": "#ffffff" }
+  },
+  "categoryAxis": {
+    "axisLine": { "lineStyle": { "color": "#1e4a7a" } },
+    "axisTick": { "lineStyle": { "color": "#1e4a7a" } },
+    "axisLabel": { "color": "#8fb3d9" },
+    "splitLine": { "lineStyle": { "color": "rgba(30,74,122,0.4)" } }
+  },
+  "valueAxis": {
+    "axisLine": { "lineStyle": { "color": "#1e4a7a" } },
+    "axisTick": { "lineStyle": { "color": "#1e4a7a" } },
+    "axisLabel": { "color": "#8fb3d9" },
+    "splitLine": { "lineStyle": { "color": "rgba(30,74,122,0.4)" } }
+  }
+}
