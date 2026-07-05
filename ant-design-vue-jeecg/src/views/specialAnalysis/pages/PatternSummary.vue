@@ -28,7 +28,10 @@ export default {
   data () {
     return { bg, data: { heatmap: { xLabels: [], yLabels: [], points: [], max: 20 }, deepCause: [], problems: [] } }
   },
-  async mounted () { this.data = await getPatternData() }
+  async mounted () {
+    try { this.data = await getPatternData() }
+    catch (e) { console.error('[sa-pattern] load failed', e) }
+  }
 }
 </script>
 

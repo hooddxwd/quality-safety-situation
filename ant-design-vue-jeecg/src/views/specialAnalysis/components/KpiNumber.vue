@@ -4,7 +4,7 @@
     <div v-if="item.values" class="kpi-number__multi">
       <div v-for="(v, i) in item.values" :key="i" class="kpi-multi-item">
         <span class="kpi-mini-label">{{ v.label }}</span>
-        <span class="num-tech kpi-mini-val" :class="'tone-' + v.tone">{{ v.value }}</span>
+        <span class="num-tech kpi-mini-val" :class="'tone-' + (v.tone || 'blue')">{{ v.value }}</span>
       </div>
     </div>
     <div v-else class="kpi-number__value num-tech" :class="'tone-' + (item.tone || 'blue')">

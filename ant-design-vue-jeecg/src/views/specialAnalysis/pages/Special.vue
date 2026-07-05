@@ -29,6 +29,9 @@ export default {
   data () {
     return { bg, data: { gantt: { rows: [], monthCount: 11 }, capability: [], safeguard: [], goals: [] } }
   },
-  async mounted () { this.data = await getSpecialData() }
+  async mounted () {
+    try { this.data = await getSpecialData() }
+    catch (e) { console.error('[sa-special] load failed', e) }
+  }
 }
 </script>

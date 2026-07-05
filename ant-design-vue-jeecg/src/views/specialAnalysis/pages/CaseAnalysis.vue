@@ -24,7 +24,10 @@ export default {
   data () {
     return { bg, data: { list: { columns: [], rows: [] }, detailSteps: [] } }
   },
-  async mounted () { this.data = await getCaseData() },
+  async mounted () {
+    try { this.data = await getCaseData() }
+    catch (e) { console.error('[sa-case] load failed', e) }
+  },
   methods: {
     onStep (s) { message.info(`「${s}」建设中`) }
   }

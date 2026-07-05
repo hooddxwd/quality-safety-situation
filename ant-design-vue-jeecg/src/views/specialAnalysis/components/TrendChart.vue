@@ -8,8 +8,8 @@ export default {
   name: 'SaTrendChart',
   components: { BaseChart },
   props: {
-    categories: { type: Array, required: true },
-    bars: { type: Array, required: true },
+    categories: { type: Array, default: () => [] },
+    bars: { type: Array, default: () => [] },
     line: { type: Object, default: null }
   },
   computed: {

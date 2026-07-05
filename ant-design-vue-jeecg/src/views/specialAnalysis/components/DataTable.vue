@@ -1,7 +1,7 @@
 <template>
   <a-table
     class="sa-table"
-    :columns="columns"
+    :columns="resolvedColumns"
     :data-source="rows"
     :pagination="false"
     size="small"
@@ -23,7 +23,10 @@ export default {
     tableHeight: { type: [Number, String], default: 220 }
   },
   computed: {
-    levelColumns () { return this.columns.filter(c => c.level) }
+    levelColumns () { return this.columns.filter(c => c.level) },
+    resolvedColumns () {
+      return this.columns.map(c => c.level ? { ...c, scopedSlots: { customRender: c.dataIndex } } : c)
+    }
   },
   methods: {
     levelClass (v) {

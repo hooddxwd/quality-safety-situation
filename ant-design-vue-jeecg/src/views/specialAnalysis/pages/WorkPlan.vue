@@ -37,6 +37,9 @@ export default {
   data () {
     return { bg, data: { kpi: [], typeDist: {}, stageDist: [], systemRank: {}, cycle: {}, table: { columns: [], rows: [] } } }
   },
-  async mounted () { this.data = await getWorkPlanData() }
+  async mounted () {
+    try { this.data = await getWorkPlanData() }
+    catch (e) { console.error('[sa-workplan] load failed', e) }
+  }
 }
 </script>

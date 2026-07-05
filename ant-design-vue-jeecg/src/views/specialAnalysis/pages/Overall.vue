@@ -37,7 +37,10 @@ export default {
       data: { kpi: [], userDist: [], trend: {}, reasonCat: [], modelDist: [], unitDist: {}, systemShare: [], conclusion: {} }
     }
   },
-  async mounted () { this.data = await getOverallData() },
+  async mounted () {
+    try { this.data = await getOverallData() }
+    catch (e) { console.error('[sa-overall] load failed', e) }
+  },
   methods: {
     kpiPos (i) {
       const left = 2 + i * (96 / 6)
