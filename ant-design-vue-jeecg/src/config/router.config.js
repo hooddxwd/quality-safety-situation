@@ -301,6 +301,18 @@ export const constantRouterMap = [
     meta: { title: '首页态势' }
   },
   {
+    path: '/special-analysis',
+    component: () => import('@/views/specialAnalysis/Layout'),
+    redirect: '/special-analysis/overall',
+    children: [
+      { path: 'overall', name: 'sa-overall', component: () => import('@/views/specialAnalysis/pages/Overall'), meta: { title: '专项分析·总体态势', tab: 'overall' } },
+      { path: 'special', name: 'sa-special', component: () => import('@/views/specialAnalysis/pages/Special'), meta: { title: '专项分析·专项分析', tab: 'special' } },
+      { path: 'workplan', name: 'sa-workplan', component: () => import('@/views/specialAnalysis/pages/WorkPlan'), meta: { title: '专项分析·工作计划', tab: 'workplan' } },
+      { path: 'case', name: 'sa-case', component: () => import('@/views/specialAnalysis/pages/CaseAnalysis'), meta: { title: '专项分析·案例分析', tab: 'case' } },
+      { path: 'pattern', name: 'sa-pattern', component: () => import('@/views/specialAnalysis/pages/PatternSummary'), meta: { title: '专项分析·规律总结', tab: 'pattern' } }
+    ]
+  },
+  {
     path: '/user',
     component: UserLayout,
     redirect: '/user/login',

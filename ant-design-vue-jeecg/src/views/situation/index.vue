@@ -113,7 +113,11 @@ export default {
     this.disposal = d; this.narrative = n; this.prediction = p
   },
   methods: {
-    onNav (t) { this.activeTab = t; if (t !== '总体态势') message.info(`「${t}」建设中`) },
+    onNav (t) {
+      this.activeTab = t
+      if (t === '专题分析') return this.$router.push('/special-analysis')
+      if (t !== '总体态势') message.info(`「${t}」建设中`)
+    },
     onAlert () { message.warning('总体态势预警（Phase1 交互壳）') }
   }
 }
